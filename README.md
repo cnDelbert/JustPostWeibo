@@ -6,9 +6,9 @@ You can post a weibo with only picture and get the url addresses of the thumb, m
 
 ## How to install
 
-You should apply your own weibo app follow http://open.weibo.com/development . Then, you can get your `APP_KEY` and `APP_SECRET` here: http://open.weibo.com/webmaster/info/basic?siteid=YOUR_SITE_ID . `CALLBACK ADDRESS` can be filled here.
+You should apply your own weibo app follow http://open.weibo.com/development . Then, you can get your `APP_KEY` and `APP_SECRET` here `http://open.weibo.com/webmaster/info/basic?siteid=YOUR_SITE_ID` . `CALLBACK ADDRESS` can be filled here `http://open.weibo.com/webmaster/privilege/oauth?siteid=YOUR_SITE_ID`.
 
-Modify the file `./inc/config-sample.inc.php` and rename the file to `./inc/config.inc.php`.
+Modify the file `inc/config-sample.inc.php` and rename the file to `inc/config.inc.php`.
 
 ## Customize
 
