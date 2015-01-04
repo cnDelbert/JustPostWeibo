@@ -7,5 +7,9 @@
  */
 
 $tags = array(
-    "Delbert", "DeathtoStock"
+    "Delbert",
+    "DeathtoStock",
+    "GTD",
+    "起床啦",
+    "睡前打卡"
 );

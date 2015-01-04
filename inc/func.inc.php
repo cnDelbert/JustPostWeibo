@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Delbert
+ * Date: 2015/1/4
+ * Time: 09:57
+ */
 	$ASS_TOK = $_COOKIE["access_token"];
 	$CODE    = $_COOKIE["code"];
 
@@ -73,22 +79,22 @@
 	function post_pic(){
 		global $APP_KEY, $ASS_TOK;
 		if($_POST["check_up"]){
-			if(empty($_FILES["pic"])){
+			if(empty($_FILES["pic"]["name"])){
 				$post_uri = "https://api.weibo.com/2/statuses/update.json";
-				$param_string = "source=$APP_KEY&access_token=$ASS_TOK&status=".urlencode($_POST["status"]);
+				$param_string = "source=$APP_KEY&access_token=$ASS_TOK&visible=".($_POST['visible'])."&status=".urlencode($_POST["status"]);
 			}else{
 				$post_uri = "https://upload.api.weibo.com/2/statuses/upload.json";
 				$param_string = array(
                     "source" => $APP_KEY,
                     "access_token" => $ASS_TOK,
+					"visible" => $_POST["visible"],
                     "status" => urlencode($_POST["status"]),
                     "pic" => "@".$_FILES["pic"]["tmp_name"]
                 );
                 //"source=$APP_KEY&access_token=$ASS_TOK&status=".urlencode($_POST["status"])."&pic=".$_FILES["pic"];
-
 			}
-			
-		
+
+			echo($_FILES["pic"]["name"]);
 			$curl_handle=curl_init();
 			curl_setopt($curl_handle, CURLOPT_URL, $post_uri);
 			curl_setopt($curl_handle, CURLOPT_POST, true);
@@ -97,7 +103,7 @@
 			curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
 			$raw_msg_return = curl_exec($curl_handle);
 			curl_close($curl_handle);
-			// echo $raw_msg_return;
+//			echo $raw_msg_return;
 			$msg_return = json_decode($raw_msg_return, true);
             return $msg_return;
 		}
