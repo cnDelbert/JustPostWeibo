@@ -77,10 +77,11 @@
 	</form>
 
 	<?php  $return_msg = post_pic();
-        if(!empty($return_msg['error'])){
+        if($return_msg == "no_check_up"){}
+        elseif(!empty($return_msg['error']) || empty($return_msg)){ // Error or no return_msg
             echo "<p>发布失败，请与管理员联系。</p>
 <p>".$return_msg['error_code'].$return_msg['error']."</p>";
-        }elseif($return_msg["thumbnail_pic"]){
+        }elseif($return_msg["thumbnail_pic"]){  // If it is picture.
             echo "<p>发布成功 ".date('Y-m-d')."</p>";
             ?>
             <table>
@@ -99,10 +100,11 @@
                     <td class="iurl"><input type="text" size="60" value="<?php echo $return_msg["original_pic"]; ?>"/></td>
                 </tr>
             </table>
-        <?php }else{
+        <?php }else{    // If it is text.
             echo "<p>发布成功 ".date('Y-m-d')."</p>";
         } ?>
 
         <?php }; ?>
+<p> &copy;2015 Delbert</p>
 </body>
 </html>
