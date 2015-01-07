@@ -78,7 +78,10 @@
 	
 	function post_pic(){
 		global $APP_KEY, $ASS_TOK;
+		// Post via form
 		if($_POST["check_up"]){
+
+			
 			if(empty($_FILES["pic"]["name"])){
 				$post_uri = "https://api.weibo.com/2/statuses/update.json";
 				$param_string = "source=$APP_KEY&access_token=$ASS_TOK&visible=".($_POST['visible'])."&status=".urlencode($_POST["status"]);

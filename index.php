@@ -21,8 +21,15 @@
     <script>
         function wb_input_clear(){
             var wb_input = document.getElementById("wb");
-            if(wb_input.value == "请在这里输入要发布的微博"){
+            if(wb_input.value == "<?php echo $CUSTOM_TIP; ?>"){
                 wb_input.value = "";
+            }
+        }
+
+        function wb_default_tip(){
+            var wb_input = document.getElementById('wb');
+            if(wb_input.value == ''){
+                wb_input.value = "<?php echo $CUSTOM_TIP; ?>"
             }
         }
 
@@ -46,13 +53,13 @@
 	<form action="./" method="POST" enctype="multipart/form-data" >
 		<input id="file_select" type="file" name="pic" />
         <br/>
-		<textarea id="wb" onfocus="wb_input_clear();" name="status" rows="5" cols="25">请在这里输入要发布的微博</textarea>
+		<textarea id="wb" onfocus="wb_input_clear();" onblur="wb_default_tip();" name="status" rows="5" cols="25"><?php echo $CUSTOM_TIP; ?></textarea>
         <br/>
 		<input name="visible" value="1" id="rad_1" type="radio"/><label for="rad_1"> 仅自己可见 </label><br/>
 		<input name="visible" value="2" id="rad_2" type="radio"/><label for="rad_2"> 好友圈可见 </label><br/>
 		<input name="visible" value="0" id="rad_0" type="radio" checked="checked"/><label for="rad_0"> 所有人可见 </label>
 		<br/><br/>
-		<input type="submit" value=" 发布微博 ">
+		<input type="submit" value=" 发布微博 "> <input type="reset" value=" 重置 " onblur="wb_default_tip();"/>
         <input class="hidden" type="text" value="<?php echo $ASS_TOK;?>" name="access_token" >
         <input class="hidden" value="true" name="check_up" >
 
@@ -69,25 +76,32 @@
 		<input type="submit" value="查看Token"> <button onclick="clear_cookie();" type="reset">清理cookies</button>
 	</form>
 
-	<?php  $img_json = post_pic();
-        if($img_json["thumbnail_pic"]){?>
+	<?php  $return_msg = post_pic();
+        if(!empty($return_msg['error'])){
+            echo "<p>发布失败，请与管理员联系。</p>
+<p>".$return_msg['error_code'].$return_msg['error']."</p>";
+        }elseif($return_msg["thumbnail_pic"]){
+            echo "<p>发布成功 ".date('Y-m-d')."</p>";
+            ?>
             <table>
                 <tr>
-                    <td>缩略图：</td>
-                    <td class="iurl"><input type="text" size="60" value="<?php echo $img_json["thumbnail_pic"]; ?>"/></td>
+                    <td><a target="_blank" href="<?php echo $return_msg["thumbnail_pic"]; ?>">缩略图</a>：</td>
+                    <td class="iurl"><input type="text" size="60" value="<?php echo $return_msg["thumbnail_pic"]; ?>"/></td>
                 </tr>
 
                 <tr>
-                    <td>中等图：</td>
-                    <td class="iurl"><input type="text" size="60" value="<?php echo $img_json["bmiddle_pic"]; ?>"/></td>
+                    <td><a href="<?php echo $return_msg["bmiddle_pic"]; ?>" target="_blank">中等图</a>：</td>
+                    <td class="iurl"><input type="text" size="60" value="<?php echo $return_msg["bmiddle_pic"]; ?>"/></td>
                 </tr>
 
                 <tr>
-                    <td>原始图：</td>
-                    <td class="iurl"><input type="text" size="60" value="<?php echo $img_json["original_pic"]; ?>"/></td>
+                    <td><a href="<?php echo $return_msg["original_pic"]; ?>" target="_blank">原始图</a>：</td>
+                    <td class="iurl"><input type="text" size="60" value="<?php echo $return_msg["original_pic"]; ?>"/></td>
                 </tr>
             </table>
-        <?php } ?>
+        <?php }else{
+            echo "<p>发布成功 ".date('Y-m-d')."</p>";
+        } ?>
 
         <?php }; ?>
 </body>
