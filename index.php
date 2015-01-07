@@ -24,21 +24,21 @@
             if(wb_input.value == "请在这里输入要发布的微博"){
                 wb_input.value = "";
             }
-        };
+        }
 
         function add_tag(e){
             var src = e.target || window.event.srcElement;
             wb_input_clear();
             var wb_input = document.getElementById("wb");
             wb_input.value += src.innerHTML;
-        };
+        }
 
         function clear_cookie(){
             var date=new Date();
             date.setTime(date.getTime()-10);
             document.cookie = "access_token= ;expires="+date.toGMTString()+";path=/;";
             document.cookie = "code= ;expires="+date.toGMTString()+";path=/;";
-        };
+        }
     </script>
 </head>
 <body>
@@ -76,12 +76,12 @@
                     <td>缩略图：</td>
                     <td class="iurl"><input type="text" size="60" value="<?php echo $img_json["thumbnail_pic"]; ?>"/></td>
                 </tr>
-                <br/>
+
                 <tr>
                     <td>中等图：</td>
                     <td class="iurl"><input type="text" size="60" value="<?php echo $img_json["bmiddle_pic"]; ?>"/></td>
                 </tr>
-                <br/>
+
                 <tr>
                     <td>原始图：</td>
                     <td class="iurl"><input type="text" size="60" value="<?php echo $img_json["original_pic"]; ?>"/></td>
