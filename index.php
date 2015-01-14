@@ -63,26 +63,26 @@
         <input class="hidden" type="text" value="<?php echo $ASS_TOK;?>" name="access_token" >
         <input class="hidden" value="true" name="check_up" >
 
-        <br/><br/>
+        <br/>
         <?php foreach($tags as $tag){ ?>
             <a href="javascript:void(0);" onclick="add_tag(event)">#<?php echo $tag;?>#</a>
         <?php }; ?>
 	</form>
 
 		<br/>
-
-	<form action="https://api.weibo.com/oauth2/get_token_info" method="POST">
-		<input class="hidden" type="text" value="<?php echo $ASS_TOK;?>" name="access_token">
-		<input type="submit" value="查看Token"> <button onclick="clear_cookie();" type="reset">清理cookies</button>
-	</form>
-
+    <?php if(DEBUG_MODE){ ?>
+        <form action="https://api.weibo.com/oauth2/get_token_info" method="POST">
+            <input class="hidden" type="text" value="<?php echo $ASS_TOK;?>" name="access_token">
+            <input type="submit" value="查看Token"> <button onclick="clear_cookie();" type="reset">清理cookies</button>
+        </form>
+    <?php } ?>
 	<?php  $return_msg = post_pic();
         if($return_msg == "no_check_up"){}
         elseif(!empty($return_msg['error']) || empty($return_msg)){ // Error or no return_msg
             echo "<p>发布失败，请与管理员联系。</p>
-<p>".$return_msg['error_code'].$return_msg['error']."</p>";
+            <p>".$return_msg['error_code']." ".$return_msg['error']."</p>";
         }elseif($return_msg["thumbnail_pic"]){  // If it is picture.
-            echo "<p>发布成功 ".date('Y-m-d')."</p>";
+            echo "<p>发布成功! ".date('Y-m-d H:i:s')."</p>";
             ?>
             <table>
                 <tr>
@@ -101,10 +101,11 @@
                 </tr>
             </table>
         <?php }else{    // If it is text.
-            echo "<p>发布成功 ".date('Y-m-d H:i:s')."</p>";
+            echo "<p>发布成功! ".date('Y-m-d H:i:s')."</p>";
         } ?>
 
         <?php }; ?>
-<p> &copy;2015 Delbert</p>
+
+    <p> &copy;2015 Delbert</p>
 </body>
 </html>

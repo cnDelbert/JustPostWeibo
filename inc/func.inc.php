@@ -100,7 +100,6 @@
 						"status" => urlencode($_POST["status"]),
 						"pic" => "@" . $_FILES["pic"]["tmp_name"]
 					);
-					//"source=$APP_KEY&access_token=$ASS_TOK&status=".urlencode($_POST["status"])."&pic=".$_FILES["pic"];
 					echo($_FILES["pic"]["name"]);
 				}else{
 					return '';
@@ -122,5 +121,4 @@
 		}else{
 			return "no_check_up";
 		}
-		
 	};
