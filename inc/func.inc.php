@@ -84,13 +84,13 @@
 				$post_uri = "https://api.weibo.com/2/statuses/update.json";
 				$param_string = "source=$APP_KEY&access_token=$ASS_TOK&visible=".($_POST['visible'])."&status=".urlencode($_POST["status"]);
 			}else {
-				if (($_FILES["file"]["type"] == "image/gif")    // .gif
-					|| ($_FILES["file"]["type"] == "image/jpeg")        // .jpg
-					|| ($_FILES["file"]["type"] == "image/pjpeg")    // .jpg for IE
-					|| ($_FILES["file"]["type"] == "image/bmp")        // .bmp
-					|| ($_FILES["file"]["type"] == "image/png")        // .png
-					|| ($_FILES["file"]["type"] == "image/x-png")
-					&& ($_FILES["file"]["size"] < 4 * 1024 * 1024)
+				if (($_FILES["pic"]["type"] == "image/gif")    // .gif
+					|| ($_FILES["pic"]["type"] == "image/jpeg")        // .jpg
+					|| ($_FILES["pic"]["type"] == "image/pjpeg")    // .jpg for IE
+					|| ($_FILES["pic"]["type"] == "image/bmp")        // .bmp
+					|| ($_FILES["pic"]["type"] == "image/png")        // .png
+					|| ($_FILES["pic"]["type"] == "image/x-png")
+					&& ($_FILES["pic"]["size"] < 4 * 1024 * 1024)
 				) {
 					$post_uri = "https://upload.api.weibo.com/2/statuses/upload.json";
 					$param_string = array(
@@ -103,7 +103,7 @@
 					//"source=$APP_KEY&access_token=$ASS_TOK&status=".urlencode($_POST["status"])."&pic=".$_FILES["pic"];
 					echo($_FILES["pic"]["name"]);
 				}else{
-					exit('<p>哎呀呀，文件上传出错啦</p>');
+					return '';
 				}
 			}
 

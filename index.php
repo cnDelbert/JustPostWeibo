@@ -101,7 +101,7 @@
                 </tr>
             </table>
         <?php }else{    // If it is text.
-            echo "<p>发布成功 ".date('Y-m-d')."</p>";
+            echo "<p>发布成功 ".date('Y-m-d H:i:s')."</p>";
         } ?>
 
         <?php }; ?>
