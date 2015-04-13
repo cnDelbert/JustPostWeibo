@@ -24,6 +24,11 @@
             if(wb_input.value == "<?php echo $CUSTOM_TIP; ?>"){
                 wb_input.value = "";
             }
+            if(wb_input.attachEvent){
+                wb_input.attachEvent("onpropertychange", function () {wb_wordcount()});
+            }else{
+                wb_input.addEventListener("input", function () {wb_wordcount()}, false)
+            }            
         }
 
         function wb_default_tip(){
@@ -46,6 +51,12 @@
             document.cookie = "access_token= ;expires="+date.toGMTString()+";path=/;";
             document.cookie = "code= ;expires="+date.toGMTString()+";path=/;";
         }
+        
+        function wb_wordcount(){
+            var wb_input = document.getElementById("wb");
+            var wb_words = document.getElementById("wordcount");
+            wb_words.innerHTML = wb_input.value.length;
+        }
     </script>
 </head>
 <body>
@@ -55,11 +66,11 @@
         <br/>
 		<textarea id="wb" onfocus="wb_input_clear();" onblur="wb_default_tip();" name="status" rows="5" cols="25"><?php echo $CUSTOM_TIP; ?></textarea>
         <br/>
-    <input name="visible" value="0" id="rad_0" type="radio" checked="checked"/><label for="rad_0"> 所有人可见 </label>
+    <input name="visible" value="0" id="rad_0" type="radio" checked="checked"/><label for="rad_0"> 所有人可见 </label><br/>
 		<input name="visible" value="1" id="rad_1" type="radio"/><label for="rad_1"> 仅自己可见 </label><br/>
 		<input name="visible" value="2" id="rad_2" type="radio"/><label for="rad_2"> 好友圈可见 </label><br/>
-		
-		<br/><br/>
+		<p>已经输入 <span id="wordcount">0</span> 字</p>
+		<br/>
 		<input type="submit" value=" 发布微博 "> <input type="reset" value=" 重置 " onblur="wb_default_tip();"/>
         <input class="hidden" type="text" value="<?php echo $ASS_TOK;?>" name="access_token" >
         <input class="hidden" value="true" name="check_up" >

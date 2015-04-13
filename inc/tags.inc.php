@@ -8,7 +8,6 @@
 
     $tags = array(
         "Delbert",
-        "DeathtoStock",
         "GTD",
         "起床啦",
         "睡前打卡"
