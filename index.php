@@ -1,7 +1,7 @@
 <?php 
 	require_once("./inc/config.inc.php");
 	require_once("./inc/func.inc.php");
-    require_once("./inc/tags.inc.php");
+	require_once("./inc/tags.inc.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -50,14 +50,15 @@
 </head>
 <body>
 	<?php if(check_code(1)){ ask_code(); } else {if(check_code(2)){ acc_token();}  ?>
-	<form action="./" method="POST" enctype="multipart/form-data" >
+	<form action="" method="POST" enctype="multipart/form-data" onkeydown="if(event.ctrlKey&&event.keyCode==13)this.submit()" >
 		<input id="file_select" type="file" name="pic" />
         <br/>
 		<textarea id="wb" onfocus="wb_input_clear();" onblur="wb_default_tip();" name="status" rows="5" cols="25"><?php echo $CUSTOM_TIP; ?></textarea>
         <br/>
+    <input name="visible" value="0" id="rad_0" type="radio" checked="checked"/><label for="rad_0"> 所有人可见 </label>
 		<input name="visible" value="1" id="rad_1" type="radio"/><label for="rad_1"> 仅自己可见 </label><br/>
 		<input name="visible" value="2" id="rad_2" type="radio"/><label for="rad_2"> 好友圈可见 </label><br/>
-		<input name="visible" value="0" id="rad_0" type="radio" checked="checked"/><label for="rad_0"> 所有人可见 </label>
+		
 		<br/><br/>
 		<input type="submit" value=" 发布微博 "> <input type="reset" value=" 重置 " onblur="wb_default_tip();"/>
         <input class="hidden" type="text" value="<?php echo $ASS_TOK;?>" name="access_token" >
