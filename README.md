@@ -20,6 +20,11 @@ You may check the example [here](http://delbert.me/weibo/).
 
 ## Release Note
 
+### v0.1.4 20150414
+
+- [x] Real-time word count.
+- [x] Ctrl+Enter to submit.
+
 ### v0.1.3 20150114
 
 - [x] Change the demo address.
